@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+	<head>
+		<meta charset="utf-8">
+		<title>Welcome in the Game</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/grid.css">
+	</head>
+	<body>
+		<header id="header">
+			<div>
+				<h1>Hello<br>in<br> rock paper scissor game!</h1>
+				<button id="newGameButton">New Game</button>
+			</div>
+		</header>
+		<section id="gamePlayground">
+			<div class="container">
+				<div class="row">
+					<p>Choose :</p>
+					<div class="col-4" id="rock">
+						<img src="https://media.licdn.com/mpr/mpr/p/5/005/092/39c/2fe7dfb.jpg">
+					</div>
+					<div class="col-4" id="paper">
+						<img src="http://4.imimg.com/data4/IE/MV/MY-978282/butter-paper-250x250.jpg">
+					</div>
+					<div class="col-4" id="scissor">
+						<img src="http://2.imimg.com/data2/UC/KS/MY-3299941/a-r-n-cutting-scissor-250x250.jpg">
+					</div>
+				</div>
+				<div class="row" id="scoresDiv">
+					<div class="col-6">
+						<p id="playerScore">0</p>
+						<p id="playerName">playername</p>
+						<p id="playerPick"></p>
+						<p id="roundForPlayer">Who will win ?</p>
+					</div>
+					<div class="col-6">
+						<p id="computerScore">0</p>
+						<p>Computer</p>
+						<p id="computerPick"></p>
+						<p id="roundForComputer">Who will win ?</p>						
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="gameScoreGround">
+			<div class="container">
+				<p>Winner is:</p>
+				<p id="winner">imię</p>
+				<button id="repeatButton">Play Again</button>
+			</div>
+		</section>
+		<script type="text/javascript" src="js/script.js"></script>
+	</body>
+</html>

@@ -1,0 +1,141 @@
+* { 
+	box-sizing: border-box; 
+	margin: 0;
+	font-family: helvetica;
+	overflow-x: hidden;
+}
+
+body { 
+	margin: 0;
+	padding: 0; 
+}
+
+.container {
+	max-width: 80%;
+	margin: 0 auto;
+}
+
+header, #gamePlayground, #gameScoreGround {
+	width: 100vw;
+	height: 100vh;
+}
+
+header {
+	position: relative;
+	background-color: #1abc9c;
+	text-align: center;
+}
+
+header div {
+	position: absolute;
+	top: calc(50% - 272px/2);
+	left: 0;
+	right: 0;
+}
+
+header h1 {
+	background-color: #81edd9;
+	font-size: 50px;
+	padding: 20px 0;
+	text-transform: uppercase;
+	color: white;
+	text-shadow: 2px 2px #2c3e50;
+}
+
+button {
+	margin-top: 30px;
+	font-size: 25px;
+	padding: 10px 20px;
+	background-color: #bc1a3a;
+	border-radius: 10px;
+	border: none;
+	border-bottom: 3px solid #791125;
+	cursor: pointer;
+	font-weight: 900;
+	color: white;
+	transition: 0.1s linear;
+}
+
+button:hover {
+	background-color: #791125;
+	border-color: #bc1a3a;
+}
+
+#gamePlayground {
+	padding: 30px 30px;
+	background-color: #2980b9;
+	text-align: center;
+}
+
+#rock, #paper, #scissor {
+	padding: 20px;
+}
+
+#rock img, #paper img, #scissor img {
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	border: solid 3px #55a5d9;
+	transition: 0.2s linear;
+	cursor: pointer;
+}
+
+#rock img:hover, #paper img:hover, #scissor img:hover {
+	opacity: 0.7;
+}
+
+#scoresDiv {
+	padding: 30px 30px;
+}
+
+#gamePlayground p:first-of-type {
+	font-size: 40px;
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: 1px;
+}
+
+#gamePlayground p {
+	padding: 15px 30px;
+	font-size: 25px;
+	color: white;
+}
+
+#gamePlayground .col-6 p:last-of-type {
+	text-transform: uppercase;
+}
+
+#gameScoreGround {
+	position: relative;
+	background-color: #e74c3c;
+	text-align: center;
+	padding: 50px 50px;
+}
+
+#gameScoreGround .container {
+	position: absolute;
+	top: calc(50% - 178px / 2);
+	left: 0;
+	right: 0;
+}
+
+#gameScoreGround p {
+	padding: 15px 15px;
+	color: white;
+	font-size: 35px;
+}
+
+#gameScoreGround p:first-of-type {
+	text-transform: uppercase;
+}
+
+#gameScoreGround button {
+	background-color: #ecf0f1;
+	border-color: #bdc3c7;
+	color: #2c3e50;
+}
+
+#gameScoreGround button:hover {
+	background-color: #bdc3c7;
+	border-color: #ecf0f1;
+}
