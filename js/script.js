@@ -128,11 +128,13 @@ function checkGameWinner(playerScore, computerScore){
 	if ( computerScore == 10) {
 		setGameElements('ended');
 		elWinner.innerHTML = 'computer';
+		elScoreGround.style.backgroundColor = '#e74c3c,';
 	}
 
 	else if ( playerScore == 10) {
 		setGameElements('ended');
 		elWinner.innerHTML = player.name;
+		elScoreGround.style.backgroundColor = '#2ecc71';
 	}
 }	
 
