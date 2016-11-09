@@ -64,44 +64,52 @@ function getPlayerPick(number) {
 	elPlayerPick.innerHTML = playerPick;
 	elComputerPick.innerHTML = computerPick;
 
-	checkRoundWinner(playerPick, computerPick);
+	checkWhoWon(playerPick, computerPick);
 }
 
-function checkRoundWinner(playerPick, computerPick) {
-	var winner = 'player'
+function checkWhoWon(playerPick, computerPick) {
 
-	if (playerPick === computerPick) {
-		winner = 'nikt';
+	var theWinner = 'player';
+
+	if (playerPick == computerPick) {
+		theWinner = 'noone';
+	}
+	
+	else if (
+		(playerPick == 'scissors' && computerPick == 'rock') ||
+		(playerPick == 'paper' && computerPick == 'scissors') ||
+		(playerPick == 'rock' && computerPick == 'paper')) {
+		theWinner = 'computer';
 	}
 
-	else if (
-		(computerPick == 'rock' && playerPick == 'scissors') ||
-		(computerPick == 'scissors' && playerPick == 'paper') ||
-		(computerPick == 'paper' && playerPick == 'rock')) {
-			winner = 'computer';
-		}
-
-	if (winner == 'player') {
+	if (theWinner == 'player') {
 		elRoundForPlayer.innerHTML = 'Wygrana!';
 		elRoundForPlayer.style.color = 'green';
 		elRoundForComp.innerHTML = 'Przegrana!';
 		elRoundForComp.style.color = 'red';
 		player.score++;
 		elPlayerScore.innerHTML = player.score;
-		checkGameWinner(player.score, computer.score);
 	}
-	else if (winner = 'computer') {
+
+	else if (theWinner == 'computer'){
 		elRoundForPlayer.innerHTML = 'You Loosed!';
 		elRoundForPlayer.style.color = 'red';
 		elRoundForComp.innerHTML = 'You Won!';
 		elRoundForComp.style.color = 'green';
 		computer.score++;
 		elComputerScore.innerHTML = computer.score;
-		checkGameWinner(player.score, computer.score);
 	}
 
-	checkGameWinner();
+	else if (theWinner == 'noone') {
+		elRoundForPlayer.innerHTML = 'Draw!';
+		elRoundForPlayer.style.color = 'orange';
+		elRoundForComp.innerHTML = 'Draw!';
+		elRoundForComp.style.color = 'orange';
+	}
+
+	checkGameWinner(player.score, computer.score);
 }
+
 
 function checkGameWinner(playerScore, computerScore){
 
