@@ -24,14 +24,26 @@ var elHeader = document.getElementById('header'),
 
 setGameElements('nonStarted');
 
+function setGameReset(){
+	player.score = 0;
+	computer.score = 0;
+	elPlayerScore.innerHTML = player.score;
+	elComputerScore.innerHTML = computer.score;
+	elRoundForPlayer.innerHTML = 'Who will win ?';
+	elRoundForComp.innerHTML = 'Who will win ?';
+	elRoundForComp.style.color = 'white';
+	elRoundForPlayer.style.color = 'white';
+
+
+}
+
 function setGameElements(gamestate){
 	switch(gamestate) {
 		case 'started':
 		elHeader.style.display = 'none';
 		elGameGround.style.display = 'block';
 		elScoreGround.style.display = 'none';
-		elPlayerScore.innerHTML = player.score;
-		elComputerScore.innerHTML = computer.score;
+		setGameReset();
 		break;
 		case 'ended':
 		elHeader.style.display = 'none';
@@ -83,9 +95,9 @@ function checkWhoWon(playerPick, computerPick) {
 	}
 
 	if (theWinner == 'player') {
-		elRoundForPlayer.innerHTML = 'Wygrana!';
+		elRoundForPlayer.innerHTML = 'You Won!';
 		elRoundForPlayer.style.color = 'green';
-		elRoundForComp.innerHTML = 'Przegrana!';
+		elRoundForComp.innerHTML = 'You Loosed!';
 		elRoundForComp.style.color = 'red';
 		player.score++;
 		elPlayerScore.innerHTML = player.score;
@@ -126,9 +138,6 @@ function checkGameWinner(playerScore, computerScore){
 
 function gameAgain() {
 	setGameElements('nonStarted');
-	player.name = '';
-	player.score = 0;
-	computer.score = 0;
 
 }
 
