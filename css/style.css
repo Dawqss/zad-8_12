@@ -1,6 +1,6 @@
 * { 
-	box-sizing: border-box; 
 	margin: 0;
+	box-sizing: border-box; 
 	font-family: helvetica;
 	overflow-x: hidden;
 }
@@ -139,5 +139,5 @@ button:hover {
 
 #gameScoreGround button:hover {
 	background-color: #bdc3c7;
-	border-color: #ecf0f1;
+	border-color: #ecf0f1; 
 }
