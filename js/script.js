@@ -96,18 +96,18 @@ function checkWhoWon(playerPick, computerPick) {
 
 	if (theWinner == 'player') {
 		elRoundForPlayer.innerHTML = 'You Won!';
-		elRoundForPlayer.style.color = 'green';
-		elRoundForComp.innerHTML = 'You Loosed!';
-		elRoundForComp.style.color = 'red';
+		elRoundForPlayer.style.color = '#47ff47';
+		elRoundForComp.innerHTML = 'You Lost!';
+		elRoundForComp.style.color = '#9e2323';
 		player.score++;
 		elPlayerScore.innerHTML = player.score;
 	}
 
 	else if (theWinner == 'computer'){
-		elRoundForPlayer.innerHTML = 'You Loosed!';
-		elRoundForPlayer.style.color = 'red';
+		elRoundForPlayer.innerHTML = 'You Lost!';
+		elRoundForPlayer.style.color = '#9e2323';
 		elRoundForComp.innerHTML = 'You Won!';
-		elRoundForComp.style.color = 'green';
+		elRoundForComp.style.color = '#47ff47';
 		computer.score++;
 		elComputerScore.innerHTML = computer.score;
 	}
@@ -128,7 +128,7 @@ function checkGameWinner(playerScore, computerScore){
 	if ( computerScore == 10) {
 		setGameElements('ended');
 		elWinner.innerHTML = 'computer';
-		elScoreGround.style.backgroundColor = '#e74c3c,';
+		elScoreGround.style.backgroundColor = '#e74c3c';
 	}
 
 	else if ( playerScore == 10) {
