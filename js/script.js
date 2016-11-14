@@ -1,30 +1,47 @@
-var elHeader = document.getElementById('header'),
-	elGameGround = document.getElementById('gamePlayground'),
-	elScoreGround = document.getElementById('gameScoreGround'),
-	elGameButton = document.getElementById('newGameButton'),
-	elPlayerScore = document.getElementById('playerScore'),
-	elPlayerName = document.getElementById('playerName'),
-	elPlayerPick = document.getElementById('playerPick'),
-	elRoundForPlayer = document.getElementById('roundForPlayer'),
-	elComputerScore = document.getElementById('computerScore'),
-	elComputerPick = document.getElementById('computerPick'),
-	elRoundForComp = document.getElementById('roundForComputer'),
-	elWinner = document.getElementById('winner'),
-	elRepeatButton = document.getElementById('repeatButton'),
-	elRock = document.getElementById('rock'),
-	elPaper = document.getElementById('paper'),
-	elScissor = document.getElementById('scissor'),
+function getElement(elementId) {
+	return document.getElementById(elementId)
+};
+
+var elHeader = getElement('header'),
+	elGameGround = getElement('gamePlayground'),
+	elScoreGround = getElement('gameScoreGround'),
+	elGameButton = getElement('newGameButton'),
+	elPlayerScore = getElement('playerScore'),
+	elPlayerName = getElement('playerName'),
+	elPlayerPick = getElement('playerPick'),
+	elRoundForPlayer = getElement('roundForPlayer'),
+	elComputerScore = getElement('computerScore'),
+	elComputerPick = getElement('computerPick'),
+	elRoundForComp = getElement('roundForComputer'),
+	elWinner = getElement('winner'),
+	elRepeatButton = getElement('repeatButton'),
+	elRock = getElement('rock'),
+	elPaper = getElement('paper'),
+	elScissor = getElement('scissor'),
 	player = {
 		name: '',
 		score: 0
 	},
 	computer = {
 		score: 0
+	},
+	gameState = {
+		NOT_STARTED: 'nonStarted',
+		STARTED: 'started',
+		ENDED: 'ended'
 	};
 
-setGameElements('nonStarted');
+elGameButton.addEventListener('click',gameStart, false);
+elRepeatButton.addEventListener('click', function() {setGameElements(gameState.NOT_STARTED);} , false); 
 
-function setGameReset(){
+elRock.addEventListener('click', function() { getPlayerPick('rock');}, false);
+elPaper.addEventListener('click', function() { getPlayerPick('paper');}, false);
+elScissor.addEventListener('click',function() { getPlayerPick('scissor');}, false);
+
+
+setGameElements(gameState.NOT_STARTED);
+
+function resetGame(){
 	player.score = 0;
 	computer.score = 0;
 	elPlayerScore.innerHTML = player.score;
@@ -33,44 +50,42 @@ function setGameReset(){
 	elRoundForComp.innerHTML = 'Who will win ?';
 	elRoundForComp.style.color = 'white';
 	elRoundForPlayer.style.color = 'white';
-
-
 }
 
 function setGameElements(gamestate){
 	switch(gamestate) {
-		case 'started':
-		elHeader.style.display = 'none';
-		elGameGround.style.display = 'block';
-		elScoreGround.style.display = 'none';
-		setGameReset();
-		break;
-		case 'ended':
-		elHeader.style.display = 'none';
-		elGameGround.style.display = 'none';
-		elScoreGround.style.display = 'block';
-		break;
-		case 'nonStarted':
-		elHeader.style.display = 'block';
-		elGameGround.style.display = 'none';
-		elScoreGround.style.display = 'none';
+		case gameState.STARTED:
+			elHeader.style.display = 'none';
+			elGameGround.style.display = 'block';
+			elScoreGround.style.display = 'none';
+			resetGame();
+			break;
+		case gameState.ENDED:
+			elHeader.style.display = 'none';
+			elGameGround.style.display = 'none';
+			elScoreGround.style.display = 'block';
+			break;
+		case gameState.NOT_STARTED:
+			elHeader.style.display = 'block';
+			elGameGround.style.display = 'none';
+			elScoreGround.style.display = 'none';
 	}
 }
 
 function gameStart() {
 	player.name = prompt('Graczu, wpisz swoje imię', 'imię gracza');
 	elPlayerName.innerHTML = player.name;
-	setGameElements('started');
+	setGameElements(gameState.STARTED);
 }
+
+var possiblePicks = ['rock', 'paper', 'scissors'];
 
 function getComputerPick() {
-	var possiblePicks = ['rock', 'paper', 'scissors'];
-	return possiblePicks[Math.floor(Math.random()*3)];
+	// @TODO: fix math random pick
+	return possiblePicks[Math.floor(Math.random() * 3)];
 }
 
-function getPlayerPick(number) {
-	var possiblePickPlayer = ['rock', 'paper', 'scissors'];
-	var playerPick = possiblePickPlayer[number];
+function getPlayerPick(playerPick) {
 	var computerPick = getComputerPick();
 
 	elPlayerPick.innerHTML = playerPick;
@@ -80,73 +95,55 @@ function getPlayerPick(number) {
 }
 
 function checkWhoWon(playerPick, computerPick) {
-
 	var theWinner = 'player';
 
-	if (playerPick == computerPick) {
+	if (playerPick === computerPick) {
 		theWinner = 'noone';
 	}
 	
 	else if (
-		(playerPick == 'scissors' && computerPick == 'rock') ||
-		(playerPick == 'paper' && computerPick == 'scissors') ||
-		(playerPick == 'rock' && computerPick == 'paper')) {
+		(playerPick === 'scissors' && computerPick === 'rock') ||
+		(playerPick === 'paper' && computerPick === 'scissors') ||
+		(playerPick === 'rock' && computerPick === 'paper')) {
 		theWinner = 'computer';
 	}
 
-	if (theWinner == 'player') {
-		elRoundForPlayer.innerHTML = 'You Won!';
-		elRoundForPlayer.style.color = 'green';
-		elRoundForComp.innerHTML = 'You Loosed!';
-		elRoundForComp.style.color = 'red';
-		player.score++;
+	function setScore(whoWon) {
+		elRoundForPlayer.innerHTML = whoWon === 'player' ? 'You Won!' : 'You Lose!';
+		elRoundForPlayer.style.color = whoWon === 'player' ? 'green' : 'red';
+		elRoundForComp.innerHTML = whoWon === 'player' ? 'You Lose!' : 'You Won!';
+		elRoundForComp.style.color = whoWon === 'player' ? 'red' : 'green';
+		if(whoWon === 'player') {
+			player.score++;
+		} else {
+			computer.score++;
+		}
 		elPlayerScore.innerHTML = player.score;
-	}
-
-	else if (theWinner == 'computer'){
-		elRoundForPlayer.innerHTML = 'You Loosed!';
-		elRoundForPlayer.style.color = 'red';
-		elRoundForComp.innerHTML = 'You Won!';
-		elRoundForComp.style.color = 'green';
-		computer.score++;
 		elComputerScore.innerHTML = computer.score;
 	}
 
-	else if (theWinner == 'noone') {
+	if (theWinner === 'player') {
+		setScore('player');
+	}
+
+	else if (theWinner === 'computer'){
+		setScore('computer');
+	}
+
+	else if (theWinner === 'noone') {
 		elRoundForPlayer.innerHTML = 'Draw!';
 		elRoundForPlayer.style.color = 'orange';
 		elRoundForComp.innerHTML = 'Draw!';
 		elRoundForComp.style.color = 'orange';
 	}
 
-	checkGameWinner(player.score, computer.score);
+	checkGameWinner();
 }
 
-
-function checkGameWinner(playerScore, computerScore){
-
-	if ( computerScore == 10) {
-		setGameElements('ended');
-		elWinner.innerHTML = 'computer';
-		elScoreGround.style.backgroundColor = '#e74c3c,';
-	}
-
-	else if ( playerScore == 10) {
-		setGameElements('ended');
-		elWinner.innerHTML = player.name;
-		elScoreGround.style.backgroundColor = '#2ecc71';
+function checkGameWinner(){
+	if (computer.score == 10 || player.score === 10) {
+		setGameElements(gameState.ENDED);
+		elWinner.innerHTML = player.score === 10 ? player.name : 'computer';
+		elScoreGround.style.backgroundColor = player.score === 10 ? '#e74c3c' : '#2ecc71';
 	}
 }	
-
-function gameAgain() {
-	setGameElements('nonStarted');
-
-}
-
-
-elGameButton.addEventListener('click',gameStart, false);
-
-elRock.addEventListener('click', function() { getPlayerPick(0);}, false);
-elPaper.addEventListener('click', function() { getPlayerPick(1);}, false);
-elScissor.addEventListener('click',function() { getPlayerPick(2);}, false);
-elRepeatButton.addEventListener('click', gameAgain , false); 
